@@ -1,0 +1,11 @@
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\bin\Debug\netcoreapp2.1\enterprise_console.deps.json
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\bin\Debug\netcoreapp2.1\enterprise_console.runtimeconfig.json
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\bin\Debug\netcoreapp2.1\enterprise_console.runtimeconfig.dev.json
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\bin\Debug\netcoreapp2.1\enterprise_console.dll
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\bin\Debug\netcoreapp2.1\enterprise_console.pdb
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\obj\Debug\netcoreapp2.1\enterprise_console.csprojAssemblyReference.cache
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\obj\Debug\netcoreapp2.1\enterprise_console.csproj.CoreCompileInputs.cache
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\obj\Debug\netcoreapp2.1\enterprise_console.AssemblyInfoInputs.cache
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\obj\Debug\netcoreapp2.1\enterprise_console.AssemblyInfo.cs
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\obj\Debug\netcoreapp2.1\enterprise_console.dll
+C:\Users\gsoler\source\repos\enterprise_console\enterprise_console\obj\Debug\netcoreapp2.1\enterprise_console.pdb
