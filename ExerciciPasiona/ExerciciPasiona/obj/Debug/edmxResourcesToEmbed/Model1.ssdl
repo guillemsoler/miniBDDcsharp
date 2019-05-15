@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="enterpriseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="buys">
+    <Key>
+      <PropertyRef Name="id_buys" />
+    </Key>
+    <Property Name="id_buys" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="manufacturer" Type="int" Nullable="false" />
+    <Property Name="customer" Type="int" Nullable="false" />
+    <Property Name="buy_date" Type="datetime" />
+    <Property Name="units" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="id_customer" />
+    </Key>
+    <Property Name="id_customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nif" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="surname" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="birth_date" Type="datetime" Nullable="false" />
+    <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="phone_number" Type="char" MaxLength="9" />
+    <Property Name="credit_card" Type="char" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="manufacturers">
+    <Key>
+      <PropertyRef Name="id_manufacturer" />
+    </Key>
+    <Property Name="id_manufacturer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="municipality" Type="varchar" MaxLength="80" Nullable="false" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="id_product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="manufacturer" Type="int" />
+    <Property Name="price" Type="money" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__buys__customer__30F848ED">
+    <End Role="customers" Type="Self.customers" Multiplicity="1" />
+    <End Role="buys" Type="Self.buys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="id_customer" />
+      </Principal>
+      <Dependent Role="buys">
+        <PropertyRef Name="customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__buys__manufactur__300424B4">
+    <End Role="manufacturers" Type="Self.manufacturers" Multiplicity="1" />
+    <End Role="buys" Type="Self.buys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="manufacturers">
+        <PropertyRef Name="id_manufacturer" />
+      </Principal>
+      <Dependent Role="buys">
+        <PropertyRef Name="manufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__products__manufa__2D27B809">
+    <End Role="manufacturers" Type="Self.manufacturers" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="manufacturers">
+        <PropertyRef Name="id_manufacturer" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="manufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="enterpriseModelStoreContainer">
+    <EntitySet Name="buys" EntityType="Self.buys" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="manufacturers" EntityType="Self.manufacturers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__buys__customer__30F848ED" Association="Self.FK__buys__customer__30F848ED">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="buys" EntitySet="buys" />
+    </AssociationSet>
+    <AssociationSet Name="FK__buys__manufactur__300424B4" Association="Self.FK__buys__manufactur__300424B4">
+      <End Role="manufacturers" EntitySet="manufacturers" />
+      <End Role="buys" EntitySet="buys" />
+    </AssociationSet>
+    <AssociationSet Name="FK__products__manufa__2D27B809" Association="Self.FK__products__manufa__2D27B809">
+      <End Role="manufacturers" EntitySet="manufacturers" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

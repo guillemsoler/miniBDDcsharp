@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="enterpriseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="buys">
+    <Key>
+      <PropertyRef Name="id_buys" />
+    </Key>
+    <Property Name="id_buys" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="manufacturer" Type="Int32" Nullable="false" />
+    <Property Name="customer" Type="Int32" Nullable="false" />
+    <Property Name="buy_date" Type="DateTime" Precision="3" />
+    <Property Name="units" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="customers" Relationship="Self.FK__buys__customer__30F848ED" FromRole="buys" ToRole="customers" />
+    <NavigationProperty Name="manufacturers" Relationship="Self.FK__buys__manufactur__300424B4" FromRole="buys" ToRole="manufacturers" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="id_customer" />
+    </Key>
+    <Property Name="id_customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nif" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surname" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="birth_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone_number" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+    <Property Name="credit_card" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="buys" Relationship="Self.FK__buys__customer__30F848ED" FromRole="customers" ToRole="buys" />
+  </EntityType>
+  <EntityType Name="manufacturers">
+    <Key>
+      <PropertyRef Name="id_manufacturer" />
+    </Key>
+    <Property Name="id_manufacturer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="municipality" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="buys" Relationship="Self.FK__buys__manufactur__300424B4" FromRole="manufacturers" ToRole="buys" />
+    <NavigationProperty Name="products" Relationship="Self.FK__products__manufa__2D27B809" FromRole="manufacturers" ToRole="products" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="id_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="manufacturer" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="manufacturers" Relationship="Self.FK__products__manufa__2D27B809" FromRole="products" ToRole="manufacturers" />
+  </EntityType>
+  <Association Name="FK__buys__customer__30F848ED">
+    <End Role="customers" Type="Self.customers" Multiplicity="1" />
+    <End Role="buys" Type="Self.buys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="id_customer" />
+      </Principal>
+      <Dependent Role="buys">
+        <PropertyRef Name="customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__buys__manufactur__300424B4">
+    <End Role="manufacturers" Type="Self.manufacturers" Multiplicity="1" />
+    <End Role="buys" Type="Self.buys" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="manufacturers">
+        <PropertyRef Name="id_manufacturer" />
+      </Principal>
+      <Dependent Role="buys">
+        <PropertyRef Name="manufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__products__manufa__2D27B809">
+    <End Role="manufacturers" Type="Self.manufacturers" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="manufacturers">
+        <PropertyRef Name="id_manufacturer" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="manufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="enterpriseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="buys" EntityType="Self.buys" />
+    <EntitySet Name="customers" EntityType="Self.customers" />
+    <EntitySet Name="manufacturers" EntityType="Self.manufacturers" />
+    <EntitySet Name="products" EntityType="Self.products" />
+    <AssociationSet Name="FK__buys__customer__30F848ED" Association="Self.FK__buys__customer__30F848ED">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="buys" EntitySet="buys" />
+    </AssociationSet>
+    <AssociationSet Name="FK__buys__manufactur__300424B4" Association="Self.FK__buys__manufactur__300424B4">
+      <End Role="manufacturers" EntitySet="manufacturers" />
+      <End Role="buys" EntitySet="buys" />
+    </AssociationSet>
+    <AssociationSet Name="FK__products__manufa__2D27B809" Association="Self.FK__products__manufa__2D27B809">
+      <End Role="manufacturers" EntitySet="manufacturers" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
