@@ -1,0 +1,12 @@
+C:\Users\gsoler\source\repos\final\final\bin\Debug\final.exe.config
+C:\Users\gsoler\source\repos\final\final\bin\Debug\final.exe
+C:\Users\gsoler\source\repos\final\final\bin\Debug\final.pdb
+C:\Users\gsoler\source\repos\final\final\bin\Debug\EntityFramework.dll
+C:\Users\gsoler\source\repos\final\final\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\gsoler\source\repos\final\final\bin\Debug\EntityFramework.xml
+C:\Users\gsoler\source\repos\final\final\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\gsoler\source\repos\final\final\obj\Debug\final.csprojAssemblyReference.cache
+C:\Users\gsoler\source\repos\final\final\obj\Debug\final.csproj.CoreCompileInputs.cache
+C:\Users\gsoler\source\repos\final\final\obj\Debug\final.csproj.CopyComplete
+C:\Users\gsoler\source\repos\final\final\obj\Debug\final.exe
+C:\Users\gsoler\source\repos\final\final\obj\Debug\final.pdb

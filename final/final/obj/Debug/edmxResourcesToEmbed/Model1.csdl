@@ -23,8 +23,8 @@
     <Property Name="birth_date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="phone_number" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
-    <Property Name="credit_card" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+    <Property Name="phone_number" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="credit_card" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="buys" Relationship="Self.FK__buys__customer__30F848ED" FromRole="customers" ToRole="buys" />
   </EntityType>
   <EntityType Name="manufacturers">

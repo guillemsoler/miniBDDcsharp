@@ -18,49 +18,64 @@ namespace final
 
         private void Controller()
         {
-            int menu = 0;
-
+            int menu;
+           
 
             using (var db = new enterpriseEntities())
             {
 
-                menu = SelectOption(menu);
+                menu = SelectOption();
 
-                switch (menu)
+                do
                 {
-                    case 1:
-                        db.products.Add(Product());
-                        db.SaveChanges();
-                        menu = SelectOption(menu);
-                        break;
-                    case 2:
-                        db.customers.Add(Client());
-                        db.SaveChanges();
-                        menu = SelectOption(menu);
-                        break;
-                    case 3:
+                    switch (menu)
+                    {
+                        case 1:
+                            db.products.Add(Product());
+                            db.SaveChanges();
+                            break;
+                        case 2:
+                            db.customers.Add(Client());
+                            db.SaveChanges();
+                            break;
+                        case 3:
 
-                        db.manufacturers.Add(Manufacturer());
-                        menu = SelectOption(menu);
-                        break;
-                    case 4:
-
-                        break;
-                    case 5:
-                        break;
-                    default:
-                        Console.WriteLine("Key error, introduce 1/2/3/4");
-                        menu = SelectOption(menu);
-                        break;
-                }
+                            db.manufacturers.Add(Manufacturer());
+                            db.SaveChanges();
+                            break;
+                        case 4:
+                            MostrarProductes();
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            Console.WriteLine("Key error, introduce 1/2/3/4");
+                            break;
+                    }
+                    menu = SelectOption();
+                } while (menu!=5);
 
             }
 
         }
-        private int SelectOption(int menu)
+        private int SelectOption()
         {
+            int menu;
 
-            Console.WriteLine("Intruduce 1 (add product), 2 (add client), 3(add manufacturer), 4(add order), 5(exit) ");
+            Console.WriteLine("Introduce: ");
+            Console.WriteLine("1) Add product");
+            Console.WriteLine("2) Add client");
+            Console.WriteLine("3) Add manufacturer");
+            Console.WriteLine("4) Show product");
+            Console.WriteLine("5) Show clients");
+            Console.WriteLine("6) Show manufacturers");
+            Console.WriteLine("7) Exit");
+
+
             menu = Convert.ToInt16(Console.ReadLine());
             Console.Clear();
 
@@ -109,8 +124,8 @@ namespace final
             DateTime birth_dateV = Convert.ToDateTime("01/01/2000");
             String genderV = "";
             String emailV = "";
-            String phoneV = "";
-            String credit_cardV = "";
+            String phoneV;
+            String credit_cardV;
 
             Console.WriteLine("Introduce the client NIF");
             nifV = Console.ReadLine();
@@ -163,27 +178,56 @@ namespace final
                 name = nameV,
                 municipality = municipalityV
             };
-            /*
-            private static manufacturers Manufacturer()
-            {
-                String nameV = " ";
-                String municipalityV = " ";
+        }
+        /*
+        private static buys Buy()
+        {
+            String productV = " ";
+            String customerV = " ";
+            DateTime buyDateV = Convert.ToDateTime(Console.ReadLine());
+            String units = " ";
 
-                Console.WriteLine("Introduce the manufacturer name");
-                nameV = Console.ReadLine();
-                Console.WriteLine("Introduce the manufacturer municipality");
-                municipalityV = Console.ReadLine();
-                Console.WriteLine("Added succesfully");
-                System.Threading.Thread.Sleep(600);
+
+
+            Console.WriteLine("Introduce the manufacturer name");
+            nameV = Console.ReadLine();
+            Console.WriteLine("Introduce the manufacturer municipality");
+            municipalityV = Console.ReadLine();
+            Console.WriteLine("Added succesfully");
+            System.Threading.Thread.Sleep(600);
+            Console.Clear();
+
+            return new orders
+            {
+                name = nameV,
+                municipality = municipalityV
+            };
+               */
+        private void MostrarProductes()
+        {
+            using (var db = new enterpriseEntities())
+            {
+                var query = from ms in db.manufacturers
+                            select ms;
+
+                foreach (manufacturers manufacture in query)
+
+                {
+
+                    Console.Write(manufacture.id_manufacturer + " " + manufacture.name);
+
+                    Console.WriteLine();
+
+                }
+
+                Console.Write("Press any key to return menu: ");
+                Console.ReadKey();
+
                 Console.Clear();
 
-                return new orders
-                {
-                    name = nameV,
-                    municipality = municipalityV
-                };
-                   */
-
+            }
         }
+
+        
     }
 }
