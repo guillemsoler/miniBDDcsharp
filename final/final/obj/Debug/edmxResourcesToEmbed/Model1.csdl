@@ -43,7 +43,7 @@
     <Property Name="id_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="title" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="manufacturer" Type="Int32" />
-    <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="price" Type="Decimal" Nullable="false" />
     <NavigationProperty Name="buys" Relationship="Self.FK__buys__product__300424B4" FromRole="products" ToRole="buys" />
     <NavigationProperty Name="manufacturers" Relationship="Self.FK__products__manufa__2D27B809" FromRole="products" ToRole="manufacturers" />
   </EntityType>

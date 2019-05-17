@@ -28,6 +28,7 @@ namespace final
 
                 do
                 {
+                    
                     switch (menu)
                     {
                         case 1:
@@ -44,39 +45,52 @@ namespace final
                             db.SaveChanges();
                             break;
                         case 4:
-                            MostrarProductes();
+                            ShowProducts();
                             break;
                         case 5:
+                            ShowCustomers();
                             break;
                         case 6:
+                            ShowManufacturers();
                             break;
                         case 7:
+                            Environment.Exit(0);
                             break;
                         default:
                             Console.WriteLine("Key error, introduce 1/2/3/4");
                             break;
                     }
                     menu = SelectOption();
-                } while (menu!=5);
+                } while (menu!=7);
 
             }
 
         }
         private int SelectOption()
         {
-            int menu;
+            int menu=0;
 
-            Console.WriteLine("Introduce: ");
+            Console.WriteLine("Select: ");
             Console.WriteLine("1) Add product");
             Console.WriteLine("2) Add client");
             Console.WriteLine("3) Add manufacturer");
             Console.WriteLine("4) Show product");
-            Console.WriteLine("5) Show clients");
-            Console.WriteLine("6) Show manufacturers");
+            Console.WriteLine("5) Show customers");
+            Console.WriteLine("6) Show manufacturers"
+                );
             Console.WriteLine("7) Exit");
 
-
-            menu = Convert.ToInt16(Console.ReadLine());
+            try
+            {
+                menu = Convert.ToInt16(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine("Key error, introduce 1/2/3/4/5/6/7");
+                System.Threading.Thread.Sleep(1200);
+                Console.Clear();
+                SelectOption();
+            }
             Console.Clear();
 
             return menu;
@@ -85,7 +99,7 @@ namespace final
         {
             String titleV = "a";
             int manufacturerV = 0;
-            decimal priceV = 0;
+            int priceV = 0;
 
             try
             {
@@ -113,7 +127,7 @@ namespace final
             {
                 title = titleV,
                 manufacturer = manufacturerV,
-                price = priceV
+                price = (decimal) priceV
             };
         }
         private static customers Client()
@@ -179,42 +193,19 @@ namespace final
                 municipality = municipalityV
             };
         }
-        /*
-        private static buys Buy()
-        {
-            String productV = " ";
-            String customerV = " ";
-            DateTime buyDateV = Convert.ToDateTime(Console.ReadLine());
-            String units = " ";
-
-
-
-            Console.WriteLine("Introduce the manufacturer name");
-            nameV = Console.ReadLine();
-            Console.WriteLine("Introduce the manufacturer municipality");
-            municipalityV = Console.ReadLine();
-            Console.WriteLine("Added succesfully");
-            System.Threading.Thread.Sleep(600);
-            Console.Clear();
-
-            return new orders
-            {
-                name = nameV,
-                municipality = municipalityV
-            };
-               */
-        private void MostrarProductes()
+        private void ShowProducts()
         {
             using (var db = new enterpriseEntities())
             {
-                var query = from ms in db.manufacturers
-                            select ms;
+                var query = from product in db.products
+                            orderby product.title
+                            select product;
 
-                foreach (manufacturers manufacture in query)
+                foreach (products product in query)
 
                 {
 
-                    Console.Write(manufacture.id_manufacturer + " " + manufacture.name);
+                    Console.Write(product.id_product + " " + product.title + " " + product.manufacturers + " " + product.price);
 
                     Console.WriteLine();
 
@@ -227,7 +218,55 @@ namespace final
 
             }
         }
+        private void ShowCustomers()
+        {
+            using (var db = new enterpriseEntities())
+            {
+                var query = from customers in db.customers
+                            select customers;
 
-        
+                foreach (customers customers in query)
+
+                {
+
+                    Console.Write(customers.id_customer + " " + customers.nif + " " + customers.name + " " + customers.surname +
+                        " " + customers.birth_date + " " + customers.gender + " " + customers.email + " " + customers.phone_number
+                        + " " + customers.credit_card);
+
+                    Console.WriteLine();
+
+                }
+
+                Console.Write("Press any key to return menu: ");
+                Console.ReadKey();
+
+                Console.Clear();
+
+            }
+        }
+        private void ShowManufacturers()
+        {
+            using (var db = new enterpriseEntities())
+            {
+                var query = from manufacturers in db.manufacturers
+                            select manufacturers;
+
+                foreach (manufacturers manufacturers in query)
+
+                {
+
+                    Console.Write(manufacturers.id_manufacturer + " " + manufacturers.name + " " + manufacturers.municipality);
+
+                    Console.WriteLine();
+
+                }
+
+                Console.Write("Press any key to return menu: ");
+                Console.ReadKey();
+
+                Console.Clear();
+
+            }
+        }
     }
 }
